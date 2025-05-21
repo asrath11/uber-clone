@@ -10,7 +10,7 @@ import cookieParser from 'cookie-parser';
 // Importing routes
 import connectDb from './database/connectDb.js';
 import userRouter from './routes/user.route.js';
-import captainRouter from './routes/capitan.route.js';
+import captainRouter from './routes/captain.route.js';
 
 export const app = express();
 

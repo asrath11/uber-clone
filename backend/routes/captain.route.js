@@ -5,7 +5,7 @@ import {
   registerCapitan,
   loginCapitan,
   getCapitanProfile,
-} from '../controllers/auth/captian.controller.js';
+} from '../controllers/auth/captain.controller.js';
 
 import { authCaptain } from '../middleware/auth.middleware.js';
 
