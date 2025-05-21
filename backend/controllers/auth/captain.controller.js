@@ -2,7 +2,7 @@ import asyncHandler from '../../utilities/asyncHandler.js';
 import { createCapitan } from '../../services/capitan.service.js';
 import Capitan from '../../models/captain.model.js';
 
-export const registerCapitan = asyncHandler(async (req, res) => {
+export const registerCaptain = asyncHandler(async (req, res) => {
   const {
     firstName,
     lastName,
@@ -56,7 +56,7 @@ export const registerCapitan = asyncHandler(async (req, res) => {
   });
 });
 
-export const loginCapitan = asyncHandler(async (req, res) => {
+export const loginCaptian = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
   // Basic input validation (optional: replace with Joi for better validation)
@@ -88,7 +88,7 @@ export const loginCapitan = asyncHandler(async (req, res) => {
   });
 });
 
-export const getCapitanProfile = asyncHandler(async (req, res) => {
+export const getCaptainProfile = asyncHandler(async (req, res) => {
   const capitan = await Capitan.findById(req.captain._id);
   if (!capitan) {
     return res.status(404).json({
