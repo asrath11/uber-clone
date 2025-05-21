@@ -79,11 +79,26 @@ export const loginCapitan = asyncHandler(async (req, res) => {
       message: 'Invalid email or password',
     });
   }
-
+  const token = capitan.generateAuthToken();
   // Respond to client
   res.status(200).json({
     status: 'success',
     capitan,
     token,
+  });
+});
+
+export const logOutCapitan = asyncHandler(async (req, res) => {
+  // Clear the token from cookies
+  res.clearCookie('token', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+  });
+
+  // Respond to client
+  res.status(200).json({
+    status: 'success',
+    message: 'Logged out successfully',
   });
 });
