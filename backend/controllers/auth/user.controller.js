@@ -49,8 +49,8 @@ export const loginUser = asyncHandler(async (req, res) => {
       message: 'Invalid email or password',
     });
   }
-  const isMatch = await user.comparePassword(password);
-  if (!isMatch) {
+  const isPasswordMatch = await user.comparePassword(password);
+  if (!isPasswordMatch) {
     return res.status(401).json({
       message: 'Invalid email or password',
     });
