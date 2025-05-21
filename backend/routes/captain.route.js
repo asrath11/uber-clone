@@ -2,15 +2,15 @@ import express from 'express';
 const router = express.Router();
 
 import {
-  registerCapitan,
-  loginCapitan,
-  getCapitanProfile,
+  registerCaptain,
+  loginCaptain,
+  getCaptainProfile,
 } from '../controllers/auth/captain.controller.js';
 
 import { authCaptain } from '../middleware/auth.middleware.js';
 
-router.post('/register', registerCapitan);
-router.post('/login', loginCapitan);
-router.get('/profile', authCaptain, getCapitanProfile);
+router.post('/register', registerCaptain);
+router.post('/login', loginCaptain);
+router.get('/profile', authCaptain, getCaptainProfile);
 
 export default router;

@@ -56,7 +56,7 @@ export const registerCaptain = asyncHandler(async (req, res) => {
   });
 });
 
-export const loginCaptian = asyncHandler(async (req, res) => {
+export const loginCaptain = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
   // Basic input validation (optional: replace with Joi for better validation)
