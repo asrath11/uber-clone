@@ -56,7 +56,7 @@ export const registerCapitan = asyncHandler(async (req, res) => {
   });
 });
 
-export const loginUser = asyncHandler(async (req, res) => {
+export const loginCapitan = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
   // Basic input validation (optional: replace with Joi for better validation)
@@ -66,8 +66,19 @@ export const loginUser = asyncHandler(async (req, res) => {
     });
   }
 
-  // Call service to handle user login logic
-  const { capitan, token } = await createCapitan({ email, password });
+  const capitan = await Capitan.findOne({ email }).select('+password');
+  if (!capitan) {
+    return res.status(401).json({
+      message: 'Invalid email or password',
+    });
+  }
+  // Check if password is correct
+  const isPasswordCorrect = await capitan.comparePassword(password);
+  if (!isPasswordCorrect) {
+    return res.status(401).json({
+      message: 'Invalid email or password',
+    });
+  }
 
   // Respond to client
   res.status(200).json({
