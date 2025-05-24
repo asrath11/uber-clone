@@ -36,7 +36,7 @@ function MainHero() {
       <img
         src='https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_552,w_552/v1684852612/assets/ba/4947c1-b862-400e-9f00-668f4926a4a2/original/Ride-with-Uber.png'
         alt=''
-        className='rounded-2xl lg:block'
+        className='rounded-2xl xl:block hidden'
       />
     </section>
   );
