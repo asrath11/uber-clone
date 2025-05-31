@@ -25,7 +25,6 @@ export const authUser = asyncHandler(async (req, res, next) => {
   if (!user) {
     return res.status(401).json({ message: 'Unauthorized: User not found' });
   }
-
   req.user = user;
   next();
 });
