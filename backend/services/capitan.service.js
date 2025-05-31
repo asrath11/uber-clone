@@ -11,10 +11,8 @@ export const createCapitan = async ({
   vehicleType,
 }) => {
   const capitan = await Capitan.create({
-    fullName: {
-      firstName,
-      lastName,
-    },
+    firstName,
+    lastName,
     email,
     password,
     vehicle: {
