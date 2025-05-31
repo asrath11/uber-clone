@@ -11,16 +11,22 @@ import cookieParser from 'cookie-parser';
 import connectDb from './database/connectDb.js';
 import userRouter from './routes/user.route.js';
 import captainRouter from './routes/captain.route.js';
+import authRouter from './routes/auth.route.js';
 
 export const app = express();
 
 // Connect to MongoDB
 connectDb();
 
+const corsOptions = {
+  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+};
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(morgan('dev'));
 app.use(helmet());
 app.use(cookieParser());
@@ -29,8 +35,15 @@ app.use(cookieParser());
 app.get('/', (req, res) => {
   res.send('Hello from the server!');
 });
+app.get('/dashboard', (req, res) => {
+  res.json({
+    message: 'Welcome to the dashboard! You are authenticated.',
+    user: req.user || null,
+  });
+});
 app.use('/users', userRouter);
 app.use('/captains', captainRouter);
+app.use('/auth', authRouter);
 
 // 404 Handler
 app.use((req, res, next) => {
