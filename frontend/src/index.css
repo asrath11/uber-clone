@@ -118,3 +118,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+@theme {
+  --color-input: #f3f3f3;
+  --color-input-border: black;
+  --color-input-focus: white;
+}
