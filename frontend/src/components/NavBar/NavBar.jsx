@@ -1,18 +1,22 @@
 import React from 'react';
-import CustomButton from '../Button/Button';
-import { MdMenu } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
+import { useUser } from '../contexts/UserProvider';
+import { Skeleton } from '@/components/ui/skeleton';
+import AuthButtons from './AuthButtons';
+import Profile from './Profile';
+import SideBar from './SideBar';
+
 function NavBar() {
+  const { user, loading } = useUser(); // ✅ FIXED
+  console.log(user);
   const navigate = useNavigate();
-  const handleLogoClick = () => {
-    navigate('/');
-  };
-  const handleSignUpClick = () => {
-    navigate('/register');
-  };
-  const handleLoginClick = () => {
-    navigate('/register');
-  };
+  const loginUrl = import.meta.env.VITE_USER_LOGIN_URL;
+  const signUpUrl = import.meta.env.VITE_USER_SIGNUP_URL;
+
+  const handleLogoClick = () => navigate('/');
+  const handleSignUpClick = () => navigate(signUpUrl);
+  const handleLoginClick = () => navigate(loginUrl);
+
   return (
     <nav className='flex justify-between items-center p-4 bg-black text-white xl:px-40'>
       <div className='flex items-center gap-10'>
@@ -23,23 +27,33 @@ function NavBar() {
           Uber
         </h1>
         <ul className='lg:flex lg:items-center lg:gap-4 hidden'>
-          <li className='text-lg cursor-pointer'>Ride</li>
-          <li className='text-lg cursor-pointer'>Drive</li>
+          <li>
+            <NavLink to='/' className='text-lg cursor-pointer'>
+              Ride
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to='/drive' className='text-lg cursor-pointer'>
+              Drive
+            </NavLink>
+          </li>
         </ul>
       </div>
       <div className='flex items-center gap-4 text'>
-        <CustomButton
-          className='bg-black/50 border border-white/30 text-white hover:bg-white/10 hover:text-white'
-          onClick={handleSignUpClick}
-        >
-          Sign Up
-        </CustomButton>
-        <CustomButton className={'text-black'} onClick={handleLoginClick}>
-          Log in
-        </CustomButton>
-        <button className='p-1 hover:bg-white/20 rounded-2xl lg:hidden'>
-          <MdMenu className='w-6 h-6' />
-        </button>
+        {loading ? (
+          <>
+            <Skeleton className='h-10 w-24 rounded-full bg-white/20' />
+            <Skeleton className='h-10 w-24 rounded-full bg-white/20' />
+          </>
+        ) : user ? (
+          <Profile />
+        ) : (
+          <AuthButtons
+            handleLoginClick={handleLoginClick}
+            handleSignUpClick={handleSignUpClick}
+          />
+        )}
+        <SideBar />
       </div>
     </nav>
   );
