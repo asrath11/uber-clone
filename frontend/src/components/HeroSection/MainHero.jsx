@@ -29,7 +29,7 @@ function MainHero() {
             Search
           </Button>
           <label className='m-5 pb-1 border-b-2 border-black/40 hover:border-black transition-all duration-300 ease-in-out cursor-pointer text-black'>
-            <Link to='/register'>Log in to see your recent activity</Link>
+            <Link to='/auth/user/login'>Log in to see your recent activity</Link>
           </label>
         </form>
       </div>

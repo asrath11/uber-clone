@@ -3,7 +3,15 @@ import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-function Hero({ title, desc, imgSrc, btnText, imgDirection = 'right', btnLink }) {
+function Hero({
+  title,
+  desc,
+  imgSrc,
+  btnText,
+  imgDirection = 'right',
+  btnLink,
+  link,
+}) {
   const navigate = useNavigate();
   const handleButtonClick = () => {
     if (btnLink) {
@@ -30,7 +38,7 @@ function Hero({ title, desc, imgSrc, btnText, imgDirection = 'right', btnLink })
             {btnText}
           </Button>
           <Link
-            to='/register'
+            to={link || import.meta.env.VITE_USER_SIGNUP_URL}
             className='pb-2 mx-3 border-b-2 border-black/40 hover:border-black transition-all duration-300 ease-in-out text-black hover:text-gray-800 focus-visible:outline-none focus-visible:border-black'
           >
             Don't have an Uber account? Sign up
